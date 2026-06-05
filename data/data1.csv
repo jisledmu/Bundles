@@ -1,0 +1,6 @@
+transaction_id,date,category,zip_code,amount
+1001,2025-01-01,Electronica,10001,150.50
+1002,2025-01-01,Hogar,10002,45.00
+1003,2025-01-01,Ropa,10001,89.99
+1004,2025-01-01,Electronica,90210,1200.00
+1005,2025-01-01,Jardin,10002,25.50

@@ -1,0 +1,50 @@
+resources:
+  jobs:
+
+    ventas_workflow:
+
+      name: ventas_workflow
+
+      parameters:
+
+        - name: catalog
+          default: ${var.catalog}
+
+        - name: schema
+          default: ${var.schema}
+
+      trigger:
+
+        pause_status: PAUSED
+
+        file_arrival:
+
+          url: ${var.volume_path}
+
+      email_notifications:
+
+        on_failure:
+          - vane_ledezma@hotmail.es
+
+      tasks:
+
+        - task_key: create_table
+
+          notebook_task:
+
+            notebook_path: ../src/notebooks/create_table.ipynb
+
+            base_parameters:
+
+              catalog: ${var.catalog}
+
+              schema: ${var.schema}
+
+        - task_key: execute_pipeline
+
+          depends_on:
+            - task_key: create_table
+
+          pipeline_task:
+
+            pipeline_id: ${resources.pipelines.elt_pipeline.id}

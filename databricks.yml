@@ -1,0 +1,42 @@
+bundle:
+  name: Bundles
+
+include:
+  - resources/*.yml
+
+variables:
+
+  catalog:
+    default: data-growth
+
+  schema:
+    default: ${bundle.target}
+
+  volume_path:
+    default: /Volumes/${var.catalog}/${var.schema}/inputs/
+
+presets:
+
+  tags:
+    project: ${bundle.name}
+    env: ${bundle.target}
+
+targets:
+
+  dev:
+    mode: development
+
+    workspace:
+      root_path: /Workspace/Bundles/${workspace.current_user.short_name}/${bundle.target}/.bundle
+
+  qa:
+    mode: production
+
+    workspace:
+      root_path: /Workspace/Bundles/${workspace.current_user.short_name}/${bundle.target}/.bundle
+
+  prod:
+    mode: production
+
+    workspace:
+      root_path: /Workspace/Bundles/${workspace.current_user.short_name}/${bundle.target}/.bundle
